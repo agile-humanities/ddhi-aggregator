@@ -28,20 +28,8 @@ __license__ = "mit"
 _logger = logging.getLogger(__name__)
 
 
-def fib(n):
-    """Fibonacci example function
-
-    Args:
-      n (int): integer
-
-    Returns:
-      int: n-th Fibonacci number
-    """
-    assert n > 0
-    a, b = 1, 1
-    for i in range(n-1):
-        a, b = b, a+b
-    return a
+def aggregate_tei(in_path, out_path):
+    _logger.info("stub aggregation happens here")
 
 
 def parse_args(args):
@@ -54,16 +42,21 @@ def parse_args(args):
       :obj:`argparse.Namespace`: command line parameters namespace
     """
     parser = argparse.ArgumentParser(
-        description="Just a Fibonacci demonstration")
+        description="Aggregate info from TEI documents for Drupal ingest")
+
     parser.add_argument(
         "--version",
         action="version",
         version="ddhi-aggregator {ver}".format(ver=__version__))
-    parser.add_argument(
-        dest="n",
-        help="n-th Fibonacci number",
-        type=int,
-        metavar="INT")
+
+    parser.add_argument('-i' '--source_dir',
+                        dest='source_dir',
+                        help='path to TEI files')
+
+    parser.add_argument('-o', '--target_dir',
+                        dest='target_dir',
+                        help='where you want to store the aggregation files')
+
     parser.add_argument(
         "-v",
         "--verbose",
@@ -71,6 +64,7 @@ def parse_args(args):
         help="set loglevel to INFO",
         action="store_const",
         const=logging.INFO)
+
     parser.add_argument(
         "-vv",
         "--very-verbose",
@@ -100,9 +94,9 @@ def main(args):
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
-    _logger.debug("Starting crazy calculations...")
-    print("The {}-th Fibonacci number is {}".format(args.n, fib(args.n)))
-    _logger.info("Script ends here")
+    _logger.debug("Starting aggregation...")
+    aggregate_tei(args.source_dir, args.target_dir)
+    _logger.info("Aggregation finished.")
 
 
 def run():
