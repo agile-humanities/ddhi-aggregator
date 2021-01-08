@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # aggregators.py
-from ddhi_encoder.entities.entities import Place
+# from ddhi_encoder.entities.entities import Place
+from ddhi_aggregator.entities.entities import Place
 
 
 class Aggregator:
@@ -12,3 +13,6 @@ class Aggregator:
         self.interviews.append(interview)
         places = interview.places()
         [self.places.append(Place(place)) for place in places]
+
+    def serialize_interview(self, interview):
+        pass

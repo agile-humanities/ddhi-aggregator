@@ -18,8 +18,11 @@ Note: This skeleton file can be safely removed if not needed!
 import argparse
 import sys
 import logging
-
+import os
 from ddhi_aggregator import __version__
+from ddhi_aggregator.aggregators.aggregators import Aggregator
+from ddhi_encoder.interview import Interview
+
 
 __author__ = "Cliff Wulfman"
 __copyright__ = "Cliff Wulfman"
@@ -29,7 +32,13 @@ _logger = logging.getLogger(__name__)
 
 
 def aggregate_tei(in_path, out_path):
-    _logger.info("stub aggregation happens here")
+    _logger.info("aggregation starting")
+    aggregator = Aggregator()
+    for f in os.listdir(in_path):
+        if f.endswith("*.tei.xml"):
+            interview = Interview()
+            interview.read(f)
+            aggregator.include(interview)
 
 
 def parse_args(args):

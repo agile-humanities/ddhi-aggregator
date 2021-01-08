@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # test_aggregators.py
 
-from ddhi_encoder.aggregators.aggregators import Aggregator
+from ddhi_aggregator.aggregators.aggregators import Aggregator
+from ddhi_aggregator.entities.entities import Place
 from ddhi_encoder.interview import Interview
 import os
 
