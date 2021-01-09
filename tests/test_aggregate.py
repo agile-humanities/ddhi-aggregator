@@ -19,5 +19,4 @@ def test_aggregate():
             interview = Interview()
             interview.read(os.path.join(in_dir, f))
             aggregator.include(interview)
-
     assert len(aggregator.interviews) == 3

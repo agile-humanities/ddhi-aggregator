@@ -20,7 +20,7 @@ import sys
 import logging
 import os
 from ddhi_aggregator import __version__
-from ddhi_aggregator.aggregators.aggregators import Aggregator
+from ddhi_aggregator.aggregators.aggregators import Aggregator, AggregatorFactory
 from ddhi_encoder.interview import Interview
 
 
@@ -33,7 +33,9 @@ _logger = logging.getLogger(__name__)
 
 def aggregate_tei(in_path, out_path):
     _logger.info("aggregation starting")
-    aggregator = Aggregator()
+    factory = AggregatorFactory()
+    
+    aggregator = factory.aggregator_for("DDHI", in_path)
     for f in os.listdir(in_path):
         if f.endswith("*.tei.xml"):
             interview = Interview()
