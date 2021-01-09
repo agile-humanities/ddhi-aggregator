@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="xd tei"
@@ -32,19 +32,20 @@
             <participants>
                 <xsl:apply-templates select="tei:TEI/tei:teiHeader/tei:profileDesc/tei:particDesc" />
             </participants>
+            <named_persons>
+                <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listPerson" />
+            </named_persons>
+            <named_places>
+                <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listPlace" />
+            </named_places>
+            <named_events>
+                <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listEvent" />
+            </named_events>
+            <named_orgs>
+                <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listOrg" />
+            </named_orgs>
         </interview>
-        <named_persons>
-            <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listPerson" />
-        </named_persons>
-        <named_places>
-            <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listPlace" />
-        </named_places>
-        <named_events>
-            <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listEvent" />
-        </named_events>
-        <named_orgs>
-            <xsl:apply-templates select="tei:TEI/tei:standOff/tei:listOrg" />
-        </named_orgs>
+
     </xsl:template>
     
     <xsl:template match="tei:body">
