@@ -62,16 +62,6 @@ class Aggregator:
     def formatted_interview(self, interview):
         return self.transform(self.interview_stylesheet, interview.tei_doc)
 
-    def formatted_interview_old(self, interview):
-        try:
-            result = self.interview_stylesheet(interview.tei_doc)
-        except etree.XMLSyntaxError as e:
-            logger.error(e)
-        if result:
-            foo = ET.ElementTree(bytes(result))
-            root = foo.getroot()
-            return etree.fromstring(root)
-
     def formatted_place(self, place):
         root = etree.Element("place")
         if place.name:
@@ -122,11 +112,9 @@ class Aggregator:
             id = etree.Element("id", type=k)
             id.text = v
             root.append(id)
-            
         return root
 
     def formatted_interviews(self):
-        # interviews = ET.Element("interviews")
         interviews = etree.Element("interviews")
         for interview in self.interviews:
             interview = self.formatted_interview(interview)
