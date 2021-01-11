@@ -9,10 +9,8 @@ also be used as template for Python modules.
 import argparse
 import sys
 import logging
-import os
 from ddhi_aggregator import __version__
-from ddhi_aggregator.aggregators.aggregators import Aggregator, AggregatorFactory
-from ddhi_encoder.interview import Interview
+from ddhi_aggregator.aggregators.aggregators import AggregatorFactory
 
 
 __author__ = "Cliff Wulfman"
@@ -25,10 +23,11 @@ _logger = logging.getLogger(__name__)
 def aggregate_tei(in_path, out_path):
     _logger.info("aggregation starting")
     factory = AggregatorFactory()
-    
+
     aggregator = factory.aggregator_for("DDHI", in_path, out_path)
     aggregator.aggregate()
-    aggregator.export_interviews()
+    aggregator.export()
+
 
 def parse_args(args):
     """Parse command line parameters
