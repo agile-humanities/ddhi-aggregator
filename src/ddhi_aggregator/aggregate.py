@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-This is a skeleton file that can serve as a starting point for a Python
-console script. To run this script uncomment the following lines in the
-[options.entry_points] section in setup.cfg:
-
-    console_scripts =
-         fibonacci = ddhi_aggregator.skeleton:run
-
-Then run `python setup.py install` which will install the command `fibonacci`
+Run `python setup.py install` which will install commands
 inside your current environment.
 Besides console scripts, the header (i.e. until _logger...) of this file can
 also be used as template for Python modules.
-
-Note: This skeleton file can be safely removed if not needed!
 """
 
 import argparse
@@ -35,13 +26,9 @@ def aggregate_tei(in_path, out_path):
     _logger.info("aggregation starting")
     factory = AggregatorFactory()
     
-    aggregator = factory.aggregator_for("DDHI", in_path)
-    for f in os.listdir(in_path):
-        if f.endswith("*.tei.xml"):
-            interview = Interview()
-            interview.read(f)
-            aggregator.include(interview)
-
+    aggregator = factory.aggregator_for("DDHI", in_path, out_path)
+    aggregator.aggregate()
+    aggregator.export_interviews()
 
 def parse_args(args):
     """Parse command line parameters

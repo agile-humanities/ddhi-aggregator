@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 class Aggregator:
     def __init__(self, input_dir, output_dir):
         self.input_dir = input_dir
+        self.output_dir = output_dir
         self.interviews = []
         self.places = []
         self.persons = []
@@ -139,6 +140,13 @@ class Aggregator:
             places.append(place)
         return places
 
+    def formatted_persons(self):
+        persons = etree.Element("named_persons")
+        for person in self.persons:
+            person = self.formatted_person(person)
+            persons.append(person)
+        return persons
+
     def formatted_orgs(self):
         orgs = etree.Element("named_orgs")
         for org in self.orgs:
@@ -152,6 +160,37 @@ class Aggregator:
             event = self.formatted_event(event)
             events.append(event)
         return events
+
+    def export(self):
+        self.export_interviews()
+        self.export_persons()
+        self.export_places()
+        self.export_events()
+
+    def export_interviews(self):
+        tree = etree.ElementTree(self.formatted_interviews())
+        tree.write(os.path.join(self.output_dir, 'Interviews.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def export_persons(self):
+        tree = etree.ElementTree(self.formatted_persons())
+        tree.write(os.path.join(self.output_dir, 'Persons.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def export_places(self):
+        tree = etree.ElementTree(self.formatted_places())
+        tree.write(os.path.join(self.output_dir, 'Places.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def export_orgs(self):
+        tree = etree.ElementTree(self.formatted_orgs())
+        tree.write(os.path.join(self.output_dir, 'Orgs.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def export_events(self):
+        tree = etree.ElementTree(self.formatted_events())
+        tree.write(os.path.join(self.output_dir, 'Events.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
 
 
 class AggregatorFactory:
