@@ -30,22 +30,22 @@ def test_include():
 def test_places():
     place = subject.places[0]
     output = subject.formatted_place(place)
-    assert(etree.tostring(output)) == b'<place><name>Hanover, New Hampshire</name><id type="DDHI">dvp_test1</id><id type="WD">Q193484</id><location>43.702222 -72.206111</location></place>'
+    assert(etree.tostring(output)) == b'<place><name>Hanover, New Hampshire</name><id type="WD">Q131908</id><location>43.702222 -72.206111</location></place>'
 
 
 def test_persons():
     person = subject.persons[0]
     output = subject.formatted_person(person)
-    assert(etree.tostring(output)) == b'<person><name>Emily Burack</name><id type="DDHI">dvp_test1</id><id type="WD">Q193484</id></person>'
+    assert(etree.tostring(output)) == b'<person><name>Emily Burack</name></person>'
 
 
 def test_orgs():
     org = subject.orgs[0]
     output = subject.formatted_org(org)
-    assert(etree.tostring(output)) == b'<org><name>Collegiate School</name><id type="DDHI">dvp_test1</id><id type="WD">Q193484</id></org>'
+    assert(etree.tostring(output)) == b'<org><name>Collegiate School</name><id type="WD">Q5146978</id></org>'
 
 
 def test_events():
     event = subject.events[0]
     output = subject.formatted_event(event)
-    assert(etree.tostring(output)) == b'<event><name>1964 New York World\'s Fair</name><id type="DDHI">dvp_test1</id><id type="WD">Q193484</id></event>'
+    assert(etree.tostring(output)) == b'<event><name>1964 New York World\'s Fair</name><id type="WD">Q1189910</id></event>'
