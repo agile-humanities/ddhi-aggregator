@@ -15,7 +15,7 @@ class Entity(object):
         self.id = element.xpath('./@xml:id',
                                 namespaces=self.namespaces)[0]
         self.idno = {}
-        idnos = element.xpath('//tei:idno',
+        idnos = element.xpath('./tei:idno',
                               namespaces=self.namespaces)
         for idno in idnos:
             type = idno.get("type")
