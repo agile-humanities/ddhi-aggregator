@@ -96,5 +96,25 @@ Good afternoon. How are you?</u>
             <persName>Beirne [pronounced BUR-nee] Lovely</persName>
          </person>
       </listPerson>
+      <listOrg>
+        <org xml:id="dvp_008_org1">
+          <orgName>Collegiate School</orgName>
+          <idno type="WD">Q5146978</idno>
+	</org>
+	<org xml:id="dvp_008_org2">
+          <orgName>Beth Israel Medical Center</orgName>
+          <idno type="WD">Q2575019</idno>
+	</org>
+      </listOrg>
+    <listEvent>
+      <event xml:id="dvp_008_event1" when-iso="1964-01-01T00:00:00Z">
+        <desc>1964 New York World's Fair</desc>
+        <idno type="WD">Q1189910</idno>
+      </event>
+      <event xml:id="dvp_008_event2" when-iso="1963-11-22T00:00:00Z">
+        <desc>assassination of John F. Kennedy</desc>
+        <idno type="WD">Q193484</idno>
+      </event>
+    </listEvent>
    </standOff>
 </TEI>

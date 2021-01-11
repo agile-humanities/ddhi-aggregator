@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from lxml import etree
-from ddhi_encoder.entities.entities import Entity,Place
+from ddhi_aggregator.entities.entities import Entity, Place, Person, Org, Event
+
 
 def test_simple():
     entity = etree.ElementTree(
@@ -38,3 +39,39 @@ def test_place():
     assert subject.idno['WD'] == "Q131908"
     assert subject.coordinates == "43.702222 -72.206111"
     assert subject.description.split()[0:2] == ["The", "project"]
+
+
+def test_person():
+    entity = etree.ElementTree(
+        etree.XML('''\
+        <person xml:id="dvp_013_person1" xmlns="http://www.tei-c.org/ns/1.0">
+            <persName>Emily Burack</persName>
+         </person>
+        '''))
+    subject = Person(entity)
+    assert(subject.name) == 'Emily Burack'
+
+
+def test_org():
+    entity = etree.ElementTree(
+        etree.XML('''\
+        <org xml:id="an_id" xmlns="http://www.tei-c.org/ns/1.0">
+        <orgName>Princeton University</orgName>
+        <idno type="WD">Q11111</idno>
+         </org>'''))
+    subject = Org(entity)
+    assert(subject.name) == 'Princeton University'
+    assert(subject.idno['WD']) == 'Q11111'
+
+
+def test_event():
+    entity = etree.ElementTree(
+        etree.XML('''\
+        <event xml:id="an_id" xmlns="http://www.tei-c.org/ns/1.0">
+        <desc>1964 World's Fair</desc>
+        <idno type="WD">Q12345</idno>
+        </event>'''))
+    subject = Event(entity)
+    assert(subject.description) == "1964 World's Fair"
+    assert(subject.idno['WD']) == 'Q12345'
+    

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from lxml import etree
 
 
 class Entity(object):
@@ -27,6 +26,10 @@ class Entity(object):
 class Place(Entity):
     def __init__(self, element):
         super().__init__(element)
+
+        name = element.xpath('./tei:placeName', namespaces=self.namespaces)
+        if name:
+            self.name = name[0].text
         self.coordinates = ""
         geo = element.xpath('./tei:location/tei:geo',
                             namespaces=self.namespaces)
@@ -37,3 +40,28 @@ class Place(Entity):
                                     namespaces=self.namespaces)
         if description:
             self.description = description[0].text
+
+
+class Person(Entity):
+    def __init__(self, element):
+        super().__init__(element)
+        name = element.xpath('./tei:persName', namespaces=self.namespaces)
+        if name:
+            self.name = name[0].text
+
+
+class Event(Entity):
+    def __init__(self, element):
+        super().__init__(element)
+        description = element.xpath('./tei:desc',
+                                    namespaces=self.namespaces)
+        if description:
+            self.description = description[0].text
+
+
+class Org(Entity):
+    def __init__(self, element):
+        super().__init__(element)
+        name = element.xpath('./tei:orgName', namespaces=self.namespaces)
+        if name:
+            self.name = name[0].text
