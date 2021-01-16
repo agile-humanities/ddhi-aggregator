@@ -36,12 +36,6 @@ class Aggregator:
         print(etree.tostring(self.formatted_places(), pretty_print=True,
                              encoding='unicode'))
 
-    def dump_interviews_old(self):
-        for interview in self.interviews:
-            formatted = self.formatted_interview(interview)
-            print(etree.tostring(formatted, pretty_print=True,
-                                 encoding='unicode'))
-
     def include(self, interview):
         self.interviews.append(interview)
         [self.places.append(Place(place)) for place in interview.places()]

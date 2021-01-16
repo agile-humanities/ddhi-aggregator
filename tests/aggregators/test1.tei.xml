@@ -90,10 +90,12 @@ Good afternoon. How are you?</u>
       </listPlace>
       <listPerson>
          <person xml:id="dvp_013_person1">
-            <persName>Emily Burack</persName>
+           <persName>Emily Burack</persName>
+	   <idno type="DDHI">dvp_013_person1</idno>
          </person>
          <person xml:id="dvp_013_person2">
-            <persName>Beirne [pronounced BUR-nee] Lovely</persName>
+           <persName>Beirne [pronounced BUR-nee] Lovely</persName>
+	   <idno type="DDHI">dvp_013_person2</idno>
          </person>
       </listPerson>
       <listOrg>

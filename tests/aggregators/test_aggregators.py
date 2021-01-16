@@ -36,7 +36,7 @@ def test_places():
 def test_persons():
     person = subject.persons[0]
     output = subject.formatted_person(person)
-    assert(etree.tostring(output)) == b'<person><name>Emily Burack</name></person>'
+    assert(etree.tostring(output)) == b'<person><name>Emily Burack</name><id type="DDHI">dvp_013_person1</id></person>'
 
 
 def test_orgs():

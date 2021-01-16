@@ -30,14 +30,6 @@ def aggregate_tei(in_path, out_path):
 
 
 def parse_args(args):
-    """Parse command line parameters
-
-    Args:
-      args ([str]): command line parameters as list of strings
-
-    Returns:
-      :obj:`argparse.Namespace`: command line parameters namespace
-    """
     parser = argparse.ArgumentParser(
         description="Aggregate info from TEI documents for Drupal ingest")
 
