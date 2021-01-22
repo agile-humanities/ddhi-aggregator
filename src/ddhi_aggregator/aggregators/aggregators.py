@@ -49,8 +49,8 @@ class Aggregator:
         except etree.XMLSyntaxError as e:
             logger.error(e)
         if result:
-            foo = ET.ElementTree(bytes(result))
-            root = foo.getroot()
+            tree = ET.ElementTree(bytes(result))
+            root = tree.getroot()
             return etree.fromstring(root)
 
     def formatted_interview(self, interview):
@@ -118,29 +118,33 @@ class Aggregator:
     def formatted_places(self):
         places = etree.Element("named_places")
         for place in self.places:
-            place = self.formatted_place(place)
-            places.append(place)
+            if len(place.idno.items()) > 0:
+                place = self.formatted_place(place)
+                places.append(place)
         return places
 
     def formatted_persons(self):
         persons = etree.Element("named_persons")
         for person in self.persons:
-            person = self.formatted_person(person)
-            persons.append(person)
+            if len(person.idno.items()) > 0:
+                person = self.formatted_person(person)
+                persons.append(person)
         return persons
 
     def formatted_orgs(self):
         orgs = etree.Element("named_orgs")
         for org in self.orgs:
-            org = self.formatted_org(org)
-            orgs.append(org)
+            if len(org.idno.items()) > 0:
+                org = self.formatted_org(org)
+                orgs.append(org)
         return orgs
 
     def formatted_events(self):
         events = etree.Element("named_events")
         for event in self.events:
-            event = self.formatted_event(event)
-            events.append(event)
+            if len(event.idno.items()) > 0:
+                event = self.formatted_event(event)
+                events.append(event)
         return events
 
     def export(self):

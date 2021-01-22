@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # test_aggregators.py
 
-from ddhi_aggregator.aggregators.aggregators import Aggregator, AggregatorFactory
-from ddhi_aggregator.entities.entities import Place, Person, Org, Event
+from ddhi_aggregator.aggregators.aggregators import AggregatorFactory
 from ddhi_encoder.interview import Interview
 from lxml import etree
 import os
@@ -26,7 +25,7 @@ def test_include():
     assert(len(subject.places)) == 4
     assert subject.places[0].coordinates == "43.702222 -72.206111"
 
-    
+
 def test_places():
     place = subject.places[0]
     output = subject.formatted_place(place)
