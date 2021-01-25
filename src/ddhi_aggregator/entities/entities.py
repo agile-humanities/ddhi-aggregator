@@ -22,6 +22,14 @@ class Entity(object):
             if type:
                 self.idno[type] = idno.text
 
+    def same_as(self, entity):
+        if (type(self) == type(entity) and
+                [k for k in entity.idno.keys() if k in self.idno.keys() and
+                 entity.idno[k] == self.idno[k]]):
+            return True
+        else:
+            return False
+
 
 class Place(Entity):
     def __init__(self, element):

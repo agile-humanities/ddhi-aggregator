@@ -72,31 +72,39 @@
     </xsl:template>
 
     <xsl:template match="tei:person[ancestor::tei:standOff]">
-        <name id="{@xml:id}">
-            <xsl:value-of select="tei:persName"/>
+      <person id="{@xml:id}">
+        <name>
+          <xsl:value-of select="tei:persName"/>
         </name>
         <xsl:apply-templates select="tei:idno" />
+      </person>
     </xsl:template>
 
     <xsl:template match="tei:place[ancestor::tei:standOff]">
-        <place id="{@xml:id}">
+      <place id="{@xml:id}">
+        <name>
             <xsl:value-of select="tei:placeName"/>
-        </place>
+        </name>
         <xsl:apply-templates select="tei:idno" />
+      </place>
     </xsl:template>
 
     <xsl:template match="tei:org[ancestor::tei:standOff]">
-        <org id="{@xml:id}">
-            <xsl:value-of select="tei:orgName"/>
-        </org>
+      <org id="{@xml:id}">
+        <name>
+	  <xsl:value-of select="tei:orgName"/>
+	</name>
         <xsl:apply-templates select="tei:idno" />
+        </org>
     </xsl:template>
 
     <xsl:template match="tei:event[ancestor::tei:standOff]">
         <event id="{@xml:id}">
+	  <name>
             <xsl:value-of select="tei:desc"/>
+	  </name>
+          <xsl:apply-templates select="tei:idno" />
         </event>
-        <xsl:apply-templates select="tei:idno" />
     </xsl:template>
 
     <xsl:template match="tei:u">

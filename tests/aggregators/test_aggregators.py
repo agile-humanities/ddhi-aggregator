@@ -13,17 +13,20 @@ subject = factory.aggregator_for("DDHI", input_dir, '/tmp')
 interview = Interview()
 interview.read(os.path.join(os.path.dirname(__file__), "test1.tei.xml"))
 subject.include(interview)
+interview2 = Interview()
+interview2.read(os.path.join(os.path.dirname(__file__), "test2.tei.xml"))
 
 
 def test_include():
 
     assert(len(subject.interviews)) == 1
     assert(len(subject.places)) == 2
-
-    subject.include(interview)
-    assert(len(subject.interviews)) == 2
-    assert(len(subject.places)) == 4
     assert subject.places[0].coordinates == "43.702222 -72.206111"
+
+    subject.include(interview2)
+    assert(len(subject.interviews)) == 2
+    # interview 2 has a duplicate place; aggregate should clear dupes
+    assert(len(subject.places)) == 3
 
 
 def test_places():

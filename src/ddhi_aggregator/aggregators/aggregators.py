@@ -36,12 +36,28 @@ class Aggregator:
         print(etree.tostring(self.formatted_places(), pretty_print=True,
                              encoding='unicode'))
 
+    def aggregate_place(self, place):
+        if not any(p.same_as(place) for p in self.places):
+            self.places.append(place)
+
+    def aggregate_person(self, person):
+        if not any(p.same_as(person) for p in self.persons):
+            self.persons.append(person)
+
+    def aggregate_org(self, org):
+        if not any(p.same_as(org) for p in self.orgs):
+            self.orgs.append(org)
+
+    def aggregate_event(self, event):
+        if not any(p.same_as(event) for p in self.events):
+            self.events.append(event)
+
     def include(self, interview):
         self.interviews.append(interview)
-        [self.places.append(Place(place)) for place in interview.places()]
-        [self.persons.append(Person(person)) for person in interview.persons()]
-        [self.orgs.append(Org(org)) for org in interview.orgs()]
-        [self.events.append(Event(event)) for event in interview.events()]
+        [self.aggregate_place(Place(place)) for place in interview.places()]
+        [self.aggregate_person(Person(person)) for person in interview.persons()]
+        [self.aggregate_org(Org(org)) for org in interview.orgs()]
+        [self.aggregate_event(Event(event)) for event in interview.events()]
 
     def transform(self, xsl, xml):
         try:
