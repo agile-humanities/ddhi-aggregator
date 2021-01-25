@@ -1,0 +1,131 @@
+<?xml-model href="../schemas/ddhi.rnc" type="application/relax-ng-compact-syntax"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="dvp_test2">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>2nd test transcript</title>
+      </titleStmt>
+      <publicationStmt>
+        <authority>
+          <orgName ref="#">Dartmouth Digital History Initiative</orgName>
+        </authority>
+        <date>
+          <!--  Date of publication, e.g. for citation purposes  -->
+        </date>
+        <idno type="DDHI">dvp_test2</idno>
+      </publicationStmt>
+      <sourceDesc>
+        <recordingStmt>
+          <recording xml:id="primary_recording" type="audio" dur-iso="9">
+            <!-- https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_duration_format.htm -->
+            <media url="" mimeType="MIMEaudio/wav"/>
+          </recording>
+        </recordingStmt>
+        <bibl xml:id="primary_transcription">
+          <respStmt>
+            <persName ref="#">Mimi Eisenberg</persName>
+            <orgName ref="#">Wordcraft</orgName>
+            <resp ref="http://id.loc.gov/vocabulary/relators/trc.html">Transcriber</resp>
+          </respStmt>
+          <ref target="path_to_file">Primary transcription</ref>
+        </bibl>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <projectDesc>
+        <p>The Dartmouth Vietnam Project</p>
+      </projectDesc>
+      <appInfo>
+        <application ident="DDHIEncoder" version="1.0.5">
+          <desc>Conversion from Word docx to TEI xml.</desc>
+        </application>
+      </appInfo>
+    </encodingDesc>
+    <profileDesc>
+      <langUsage>
+        <language ident="en-us">English</language>
+      </langUsage>
+      <particDesc>
+        <person xml:id="INTERVIEWER"/>
+        <person xml:id="NARRATOR"/>
+      </particDesc>
+      <settingDesc>
+        <setting>
+          <date when-iso="2014-08-07"/>
+          <locale/>
+        </setting>
+      </settingDesc>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <u who="INTERVIEWER">Mentions <placeName ref="#dvp_008_place1">Hanover</placeName>, also mentioned in test interview 1.</u>
+      <u who="NARRATOR">Mentions <placeName ref="#dvp_008_place2">New York City</placeName>, not in test interview 1.</u>
+    </body>
+  </text>
+  <standOff>
+    <listPlace>
+      <place xml:id="dvp_008_place1">
+        <placeName>Hanover, New Hampshire</placeName>
+	<location>
+          <geo>43.702222 -72.206111</geo>
+        </location>
+            <idno type="WD">Q131908</idno>
+      </place>
+      <place xml:id="dvp_008_place2">
+        <placeName>New York City</placeName>
+        <location>
+          <geo>40.67 -73.94</geo>
+        </location>
+        <idno type="WD">Q60</idno>
+      </place>
+    </listPlace>
+
+    <listPerson>
+      <person xml:id="dvp_008_person1">
+        <persName>Fred Astaire</persName>
+      </person>
+      <person xml:id="dvp_008_person2">
+        <persName>Ginger Rogers</persName>
+        <idno type="WD">Q959262</idno>
+      </person>
+      <person xml:id="dvp_008_person3">
+        <persName>Robert NoID</persName>
+      </person>
+    </listPerson>
+
+    <listOrg>
+      <org xml:id="dvp_008_org1">
+        <orgName>Collegiate School</orgName>
+        <idno type="WD">Q5146978</idno>
+      </org>
+      <org xml:id="dvp_008_org2">
+        <orgName>Beth Israel Medical Center</orgName>
+        <idno type="WD">Q2575019</idno>
+      </org>
+    </listOrg>
+
+    <listEvent>
+      <event xml:id="dvp_008_event1" when-iso="1964-01-01T00:00:00Z">
+        <desc>1964 New York World's Fair</desc>
+        <idno type="WD">Q1189910</idno>
+      </event>
+      <event xml:id="dvp_008_event2" when-iso="1963-11-22T00:00:00Z">
+        <desc>assassination of John F. Kennedy</desc>
+        <idno type="WD">Q193484</idno>
+      </event>
+      <event xml:id="dvp_008_event3" from-iso="1947-01-01T00:00:00Z" to-iso="1991-01-01T00:00:00Z">
+        <desc>Cold War</desc>
+        <idno type="WD">Q8683</idno>
+      </event>
+      <event xml:id="dvp_008_event4" when-iso="1955-11-01T00:00:00Z" from-iso="1965-11-01T00:00:00Z" to-iso="1975-04-30T00:00:00Z">
+        <desc>Vietnam War</desc>
+        <idno type="WD">Q8740</idno>
+      </event>
+      <event xml:id="dvp_008_event5" when-iso="1963-11-22T00:00:00Z">
+        <desc>assassination of John F. Kennedy</desc>
+        <idno type="WD">Q193484</idno>
+      </event>
+    </listEvent>
+  </standOff>
+</TEI>
