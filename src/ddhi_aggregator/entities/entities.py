@@ -93,3 +93,10 @@ class Date():
         when = element.xpath('./@when', namespaces=self.namespaces)
         if when:
             self.when = when[0]
+
+
+    def same_as(self, entity):
+        if (type(self) == type(entity) and entity.when == self.when):
+            return True
+        else:
+            return False

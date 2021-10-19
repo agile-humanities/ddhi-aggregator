@@ -51,3 +51,9 @@ def test_events():
     event = subject.events[0]
     output = subject.formatted_event(event)
     assert(etree.tostring(output)) == b'<event><name>1964 New York World\'s Fair</name><id type="WD">Q1189910</id></event>'
+
+
+def test_dates():
+    date = subject.dates[0]
+    output = subject.formatted_date(date)
+    assert(etree.tostring(output)) == b'<date>2016-02-10</date>'

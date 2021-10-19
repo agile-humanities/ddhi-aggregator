@@ -36,13 +36,15 @@ class Aggregator:
     places (array): a list of the places compiled from all the
     interviews.
 
-    persons (array): a li8st of the persons compiled from the
+    persons (array): a list of the persons compiled from the
     interviews.
 
-    orgs(array): a li8st of the organizations compiled from the
+    orgs(array): a list of the organizations compiled from the
     interviews.
 
-    events(array): a li8st of the events compiled from the interviews.
+    events(array): a list of the events compiled from the interviews.
+
+    dates(array): a list of the dates compiled from the interviews.
 
     """
 
@@ -171,6 +173,12 @@ class Aggregator:
             root.append(id)
         return root
 
+    def formatted_date(self, date):
+        root = etree.Element("date")
+        if date.when:
+            root.text = date.when
+        return root
+
     def formatted_interviews(self):
         interviews = etree.Element("interviews")
         for interview in self.interviews:
@@ -210,11 +218,18 @@ class Aggregator:
                 events.append(event)
         return events
 
+    def formatted_dates(self):
+        dates = etree.Element("named_dates")
+        for date in self.dates:
+            dates.append(self.formatted_date(date))
+        return dates
+
     def export(self):
         self.export_interviews()
         self.export_persons()
         self.export_places()
         self.export_events()
+        self.export_dates()
 
     def export_interviews(self):
         tree = etree.ElementTree(self.formatted_interviews())
@@ -239,6 +254,11 @@ class Aggregator:
     def export_events(self):
         tree = etree.ElementTree(self.formatted_events())
         tree.write(os.path.join(self.output_dir, 'Events.xml'),
+                   pretty_print=True, xml_declaration=True, encoding='utf-8')
+
+    def export_dates(self):
+        tree = etree.ElementTree(self.formatted_dates())
+        tree.write(os.path.join(self.output_dir, 'Dates.xml'),
                    pretty_print=True, xml_declaration=True, encoding='utf-8')
 
 
