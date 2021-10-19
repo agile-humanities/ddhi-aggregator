@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from lxml import etree
-from ddhi_aggregator.entities.entities import Entity, Place, Person, Org, Event
+from ddhi_aggregator.entities.entities import Entity, Place, Person, Org, Event, Date
 
 
 def test_simple():
@@ -74,4 +74,13 @@ def test_event():
     subject = Event(entity)
     assert(subject.description) == "1964 World's Fair"
     assert(subject.idno['WD']) == 'Q12345'
-    
+
+
+def test_date():
+    entity = etree.ElementTree(
+        etree.XML('''\
+        <date when="1944" xmlns="http://www.tei-c.org/ns/1.0">
+        1944
+        </date>'''))
+    subject = Date(entity)
+    assert(subject.when) == "1944"

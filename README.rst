@@ -3,13 +3,18 @@ ddhi-aggregator
 ===============
 
 
-Add a short description here!
+A command-line tool for aggregating various bits of data from
+DDHI-encoded Interviews into a set of files that can be ingested by
+the DDHI's Drupal application.
 
 
 Description
 ===========
 
-A longer description of your project goes here...
+There is a single command, *ddhi_aggregate*, which takes two arguments: a directory of TEI-encoded interviews to be processed, and a directory for the output:
+
+.. code-block:: sh
+		ddhi_aggregate -i interviews/ -o aggregated_data/
 
 
 Note

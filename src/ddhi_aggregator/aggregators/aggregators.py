@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # aggregators.py
-from ddhi_aggregator.entities.entities import Place, Person, Org, Event
+from ddhi_aggregator.entities.entities import Place, Person, Org, Event, Date
 from ddhi_encoder.interview import Interview
 import xml.etree.ElementTree as ET
 from lxml import etree
@@ -12,6 +12,40 @@ logger = logging.getLogger(__name__)
 
 
 class Aggregator:
+    """The main class for the module.
+
+    An Aggregator takes a directory of TEI-encoded interviews and
+    extracts various bits of information required by the Drupal
+    module, as specified in the `DDHI Aggregator Revised
+    Specifications
+    https://docs.google.com/document/d/1Qufog4OEty0z8ChGqCTOGIYsSdMt33xr4LRtKhHV5nc/edit#`_
+    It can then serialize that information into the specified
+    documents, in the specified formats.
+
+    Attributes
+    ----------
+
+    input_dir (str): the path to the directory of TEI files
+
+    output_dir (str): the path to the directory to which the
+    serialized files should be written.  It must already exist.
+
+    interviews (array): an array of Interview objects, one for each
+    TEI file.
+
+    places (array): a list of the places compiled from all the
+    interviews.
+
+    persons (array): a li8st of the persons compiled from the
+    interviews.
+
+    orgs(array): a li8st of the organizations compiled from the
+    interviews.
+
+    events(array): a li8st of the events compiled from the interviews.
+
+    """
+
     def __init__(self, input_dir, output_dir):
         self.input_dir = input_dir
         self.output_dir = output_dir
@@ -20,8 +54,15 @@ class Aggregator:
         self.persons = []
         self.orgs = []
         self.events = []
+        self.dates = []
 
     def aggregate(self):
+        """Reads the TEI files in the input directory and includes their
+        processed parts in the aggregator lists.
+
+        Most of the work is done by the include method.
+        """
+
         for f in os.listdir(os.path.abspath(self.input_dir)):
             if f.endswith(".tei.xml"):
                 interview = Interview()
@@ -52,12 +93,18 @@ class Aggregator:
         if not any(p.same_as(event) for p in self.events):
             self.events.append(event)
 
+    def aggregate_date(self, date):
+        if not any(p.same_as(date) for p in self.dates):
+            self.dates.append(date)
+
+
     def include(self, interview):
         self.interviews.append(interview)
         [self.aggregate_place(Place(place)) for place in interview.places()]
         [self.aggregate_person(Person(person)) for person in interview.persons()]
         [self.aggregate_org(Org(org)) for org in interview.orgs()]
         [self.aggregate_event(Event(event)) for event in interview.events()]
+        [self.aggregate_date(Date(date)) for date in interview.dates()]
 
     def transform(self, xsl, xml):
         try:
@@ -196,6 +243,18 @@ class Aggregator:
 
 
 class AggregatorFactory:
+    """A factory class for creating project-specific aggregators.
+
+    The primary purpose of this factory is to associate a
+    project-specific XSL stylesheet with the aggregator, so that it
+    can process project-specific TEI files properly
+
+    This class is meant to be extended, subclassed, or replaced by
+    project-specific factories that set project-specific XSL
+    stylesheets.
+
+    """
+
     def aggregator_for(self, project, input_dir, output_dir):
         if project == "DDHI":
             aggregator = Aggregator(input_dir, output_dir)
