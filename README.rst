@@ -13,8 +13,7 @@ Description
 
 There is a single command, *ddhi_aggregate*, which takes two arguments: a directory of TEI-encoded interviews to be processed, and a directory for the output:
 
-.. code-block:: sh
-		ddhi_aggregate -i interviews/ -o aggregated_data/
+ddhi_aggregate -i interviews/ -o aggregated_data/
 
 
 Note
