@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import xml.etree.ElementTree as ET
+from lxml import etree
 
 
 class Entity(object):
@@ -74,26 +76,34 @@ class Org(Entity):
         if name:
             self.name = name[0].text
 
+
 '''
 Dates are different from the other entities: they do not have ids.  So
 they are not a subclass of the Entity class, and must duplicate some of
 Entity's init code.
 '''
+
+
 class Date():
     TEI_NAMESPACE = "http://www.tei-c.org/ns/1.0"
     TEI = "{%s}" % TEI_NAMESPACE
     XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"
     XML = "{%s}" % XML_NAMESPACE
     NSMAP = {None: TEI_NAMESPACE, "xml": XML_NAMESPACE}
-    
+   
     def __init__(self, element):
         self.namespaces = {"tei": "http://www.tei-c.org/ns/1.0",
                            "xml": "http://www.w3.org/XML/1998/namespace"}
         self._xml = element
         when = element.xpath('./@when', namespaces=self.namespaces)
+        when_iso = element.xpath('./@when-iso', namespaces=self.namespaces)
         if when:
             self.when = when[0]
-
+        elif when_iso:
+            self.when = when_iso[0]
+        else:
+            self.when = element.xpath('./text()',
+                                      namespaces=self.namespaces)[0]
 
     def same_as(self, entity):
         if (type(self) == type(entity) and entity.when == self.when):
