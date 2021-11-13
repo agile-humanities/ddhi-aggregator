@@ -228,6 +228,7 @@ class Aggregator:
         self.export_interviews()
         self.export_persons()
         self.export_places()
+        self.export_orgs()
         self.export_events()
         self.export_dates()
 
