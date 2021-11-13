@@ -129,4 +129,13 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
+
+    <xsl:template match="tei:date">
+      <date>
+	<xsl:if test="@when">
+	  <xsl:attribute name="when"><xsl:value-of select="@when"/></xsl:attribute>
+	</xsl:if>
+	<xsl:apply-templates/>
+      </date>
+    </xsl:template>
 </xsl:stylesheet>
